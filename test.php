@@ -1,17 +1,7 @@
 <?php
 
-$array = [];
-$array[] = array(
-	"fieldName" => "name",
-	"type" => "name"
-);
-$array[] = array(
-	"fieldName" => "passwd",
-	"type" => "password"
+$array = array(
+	"hoge" => 1
 );
 
-foreach($array as $i => $value_){
-	foreach($value_ as $key => $value){
-		echo $key."=>".$value.PHP_EOL;
-	}
-}
+echo gettype($array);

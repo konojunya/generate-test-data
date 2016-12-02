@@ -10,11 +10,23 @@ class Factory{
 		$this->faker = Faker\Factory::create("ja_JP");
 	}
 
+	/*
+	*		getFakeData
+	*		jsからjavascriptObjectの形で受け取り他のメソッドへ流す
+	*		@param { Array } rawDataObject
+	*		@return { String } row_data PHPのオブジェクトなのでsql文へ変換する
+	*/
 	public function getFakeData($rawDataObject){
 		$row_data = $this->getFakerRow($rawDataObject);
 		return $this->convert_to_sql($row_data);
 	}
 
+	/*
+	*		getFakerRow
+	*		javascriptObjectのtypeからfakerを通して値を取得する
+	*		@param { Array } rawDataArray
+	*		@return { Array } return_row
+	*/
 	private function getFakerRow($rawDataArray){
 		foreach ($rawDataArray as $key => $value):
 			$return_row[$key] = array(
@@ -25,6 +37,11 @@ class Factory{
 		return $return_row;
 	}
 
+	/*
+	*		convert_to_sql
+	*		@param { Array } rawDataObject
+	*		@return { String } sql sql文にして返却する
+	*/
 	private function convert_to_sql($rawDataObject){
 		$keyArray = [];
 		$valueArray = [];
@@ -35,7 +52,8 @@ class Factory{
 			$valueArray[] = gettype($value) === "integer" ? $value : "'".$value."'";
 		endforeach;
 
-		return "insert into '{$this->tableName}' (".join(",",$keyArray).") values (".join(",",$valueArray).");";
+		$sql = "insert into '{$this->tableName}' (".join(",",$keyArray).") values (".join(",",$valueArray).");";
+		return $sql;
 	}
 
 }
