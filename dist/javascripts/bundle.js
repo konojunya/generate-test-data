@@ -21571,30 +21571,63 @@
 							"div",
 							{ className: "page-content" },
 							_react2.default.createElement(
-								"table",
-								{ className: "mdl-data-table mdl-js-data-table mdl-shadow--2dp", id: "table" },
+								"div",
+								{ className: "table" },
 								_react2.default.createElement(
-									"thead",
-									null,
+									"table",
+									{ className: "mdl-data-table mdl-js-data-table mdl-shadow--2dp", id: "table" },
 									_react2.default.createElement(
-										"tr",
+										"thead",
 										null,
 										_react2.default.createElement(
-											"th",
-											{ className: "mdl-data-table__cell--non-numeric" },
-											"Field Name"
-										),
-										_react2.default.createElement(
-											"th",
+											"tr",
 											null,
-											"Type"
+											_react2.default.createElement(
+												"th",
+												{ className: "mdl-data-table__cell--non-numeric" },
+												"Field Name"
+											),
+											_react2.default.createElement(
+												"th",
+												null,
+												"Type"
+											)
 										)
+									),
+									_react2.default.createElement(
+										"tbody",
+										null,
+										_react2.default.createElement(_TableCell2.default, null)
 									)
 								),
 								_react2.default.createElement(
-									"tbody",
-									null,
-									_react2.default.createElement(_TableCell2.default, null)
+									"button",
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add_btn" },
+									"Add Field"
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "settings" },
+								_react2.default.createElement(
+									"div",
+									{ className: "mdl-textfield mdl-js-textfield call-count-box" },
+									_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", pattern: "-?[0-9]*(\\.[0-9]+)?", id: "callCount" }),
+									_react2.default.createElement(
+										"label",
+										{ className: "mdl-textfield__label", "for": "callCount" },
+										"call count..."
+									)
+								),
+								_react2.default.createElement(
+									"button",
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" },
+									"download"
+								),
+								_react2.default.createElement(
+									"button",
+									{ className: "mdl-button mdl-js-button mdl-js-ripple-effect preview_btn" },
+									"preview"
 								)
 							)
 						)
