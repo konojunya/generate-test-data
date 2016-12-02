@@ -1,9 +1,30 @@
 import React from "react"
 
+import AppStore from "../stores/AppStore"
+
 import Header from "./Header.jsx"
 import TableCell from "./TableCell.jsx"
 
+var getAppState = () =>{
+	return {
+		allFields: AppStore.getAll()
+	}
+}
+
 export default class App extends React.Component{
+
+	constructor(props) {
+		super(props);
+		this.state = getAppState()
+	}
+
+	componentDidMount(){
+		AppStore.addChangeListener(this._onChange)
+	}
+
+	componentWillUnmount(){
+		AppStore.removeChangeListener(this._onChange)
+	}
 
 	render(){
 
@@ -45,6 +66,10 @@ export default class App extends React.Component{
 			  </main>
 			</div>
 		)
+	}
+
+	_onChange = () => {
+		this.setState(getAppState())
 	}
 
 }
