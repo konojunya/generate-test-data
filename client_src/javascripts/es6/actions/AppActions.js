@@ -7,21 +7,21 @@ var AppActions = {
 		AppDispatcher.dispatch({
 			actionType: AppConstants.CREATE
 		})
-	}
+	},
 
 	destroy(id){
 		AppDispatcher.dispatch({
 			actionType: AppConstants.DESTROY,
 			id: id
 		})
-	}
+	},
 
 	change_field_name(name){
 		AppDispatcher.dispatch({
 			actionType: AppConstants.CHANGE_FIELD_NAME,
 			name: name
 		})
-	}
+	},
 
 	change_field_type(type){
 		AppDispatcher.dispatch({

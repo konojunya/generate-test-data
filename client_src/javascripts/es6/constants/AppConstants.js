@@ -1,6 +1,8 @@
-export default AppConstants = {
+var AppConstants = {
 	CREATE: "CREATE",
 	DESTROY: "DESTROY",
 	CHANGE_FIELD_NAME: "CHANGE_FIELD_NAME",
 	CHANGE_FIELD_TYPE: "CHANGE_FIELD_TYPE"
 }
+
+export default AppConstants

@@ -21535,6 +21535,10 @@
 
 	var _AppStore2 = _interopRequireDefault(_AppStore);
 
+	var _AppActions = __webpack_require__(341);
+
+	var _AppActions2 = _interopRequireDefault(_AppActions);
+
 	var _Header = __webpack_require__(179);
 
 	var _Header2 = _interopRequireDefault(_Header);
@@ -21565,6 +21569,22 @@
 
 			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+			_this._create = function () {
+				_AppActions2.default.create();
+			};
+
+			_this._destroy = function (id) {
+				_AppActions2.default.destroy(id);
+			};
+
+			_this._download = function () {
+				console.log("download button");
+			};
+
+			_this._preview = function () {
+				console.log("preview button");
+			};
+
 			_this._onChange = function () {
 				_this.setState(getAppState());
 			};
@@ -21586,6 +21606,13 @@
 		}, {
 			key: "render",
 			value: function render() {
+
+				var list = [],
+				    allFields = this.state.allFields;
+
+				for (var key in allFields) {
+					list.push(_react2.default.createElement(_TableCell2.default, { key: key, field_data: allFields[key], destroy_action: this._destroy }));
+				}
 
 				return _react2.default.createElement(
 					"div",
@@ -21624,12 +21651,12 @@
 									_react2.default.createElement(
 										"tbody",
 										null,
-										_react2.default.createElement(_TableCell2.default, null)
+										list
 									)
 								),
 								_react2.default.createElement(
 									"button",
-									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add_btn" },
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add_btn", onClick: this._create },
 									"Add Field"
 								)
 							),
@@ -21642,18 +21669,18 @@
 									_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", pattern: "-?[0-9]*(\\.[0-9]+)?", id: "callCount" }),
 									_react2.default.createElement(
 										"label",
-										{ className: "mdl-textfield__label", "for": "callCount" },
+										{ className: "mdl-textfield__label", htmlFor: "callCount" },
 										"call count..."
 									)
 								),
 								_react2.default.createElement(
 									"button",
-									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" },
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn", onClick: this._download },
 									"download"
 								),
 								_react2.default.createElement(
 									"button",
-									{ className: "mdl-button mdl-js-button mdl-js-ripple-effect preview_btn" },
+									{ className: "mdl-button mdl-js-button mdl-js-ripple-effect preview_btn", onClick: this._preview },
 									"preview"
 								)
 							)
@@ -21753,9 +21780,25 @@
 		_inherits(TableCell, _React$Component);
 
 		function TableCell() {
+			var _ref;
+
+			var _temp, _this, _ret;
+
 			_classCallCheck(this, TableCell);
 
-			return _possibleConstructorReturn(this, (TableCell.__proto__ || Object.getPrototypeOf(TableCell)).apply(this, arguments));
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TableCell.__proto__ || Object.getPrototypeOf(TableCell)).call.apply(_ref, [this].concat(args))), _this), _this._changeFieldName = function () {
+				console.log("change name");
+			}, _this._onChangeFieldType = function () {
+				console.log("changeFieldType button");
+			}, _this._destory = function (e) {
+				var target = e.target,
+				    id = target.dataset.id || target.parentNode.dataset.id;
+				_this.props.destroy_action(id);
+			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
 
 		_createClass(TableCell, [{
@@ -21771,7 +21814,7 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "mdl-textfield mdl-js-textfield" },
-							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text" }),
+							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", onKeyDown: this._changeFieldName, value: this.props.field_data.name }),
 							_react2.default.createElement(
 								"label",
 								{ className: "mdl-textfield__label" },
@@ -21784,8 +21827,8 @@
 						null,
 						_react2.default.createElement(
 							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" },
-							"name"
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", onClick: this._onChangeFieldType, "data-type": this.props.field_data.type },
+							this.props.field_data.type
 						)
 					),
 					_react2.default.createElement(
@@ -21793,7 +21836,7 @@
 						{ className: "delete_btn" },
 						_react2.default.createElement(
 							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" },
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._destory, "data-id": this.props.field_data.id },
 							_react2.default.createElement(
 								"i",
 								{ className: "material-icons" },
@@ -22366,7 +22409,7 @@
 		var id = (+new Date() + ~(Math.random() * 999999)).toString(36);
 		_fields[id] = {
 			id: id,
-			type: "",
+			type: "name",
 			name: ""
 		};
 	};
@@ -22971,12 +23014,62 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.default = AppConstants = {
+	var AppConstants = {
 		CREATE: "CREATE",
 		DESTROY: "DESTROY",
 		CHANGE_FIELD_NAME: "CHANGE_FIELD_NAME",
 		CHANGE_FIELD_TYPE: "CHANGE_FIELD_TYPE"
 	};
+
+	exports.default = AppConstants;
+
+/***/ },
+/* 341 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _AppDispatcher = __webpack_require__(336);
+
+	var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
+
+	var _AppConstants = __webpack_require__(340);
+
+	var _AppConstants2 = _interopRequireDefault(_AppConstants);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AppActions = {
+		create: function create() {
+			_AppDispatcher2.default.dispatch({
+				actionType: _AppConstants2.default.CREATE
+			});
+		},
+		destroy: function destroy(id) {
+			_AppDispatcher2.default.dispatch({
+				actionType: _AppConstants2.default.DESTROY,
+				id: id
+			});
+		},
+		change_field_name: function change_field_name(name) {
+			_AppDispatcher2.default.dispatch({
+				actionType: _AppConstants2.default.CHANGE_FIELD_NAME,
+				name: name
+			});
+		},
+		change_field_type: function change_field_type(type) {
+			_AppDispatcher2.default.dispatch({
+				actionType: _AppConstants2.default.CHANGE_FIELD_TYPE,
+				type: type
+			});
+		}
+	};
+
+	exports.default = AppActions;
 
 /***/ }
 /******/ ]);

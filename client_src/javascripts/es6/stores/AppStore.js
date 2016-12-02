@@ -11,7 +11,7 @@ var create = () => {
 	var id = (+new Date() + ~(Math.random()*999999)).toString(36)
 	_fields[id] = {
 		id: id,
-		type: "",
+		type: "name",
 		name: ""
 	}
 }

@@ -1,6 +1,7 @@
 import React from "react"
 
 import AppStore from "../stores/AppStore"
+import AppActions from "../actions/AppActions"
 
 import Header from "./Header.jsx"
 import TableCell from "./TableCell.jsx"
@@ -28,6 +29,13 @@ export default class App extends React.Component{
 
 	render(){
 
+		var list = [],
+				allFields = this.state.allFields;
+
+		for(var key in allFields){
+			list.push(<TableCell key={key} field_data={allFields[key]} destroy_action={this._destroy}/>)
+		}
+
 		return(
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				<Header/>
@@ -44,11 +52,11 @@ export default class App extends React.Component{
 							  </thead>
 							  <tbody>
 
-							    <TableCell/>
+							  	{list}
 
 							  </tbody>
 							</table>
-							<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add_btn">
+							<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent add_btn" onClick={this._create}>
 								Add Field
 							</button>
 						</div>
@@ -56,16 +64,32 @@ export default class App extends React.Component{
 				    <div className="settings">
 						  <div className="mdl-textfield mdl-js-textfield call-count-box">
 						    <input className="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="callCount"/>
-						    <label className="mdl-textfield__label" for="callCount">call count...</label>
+						    <label className="mdl-textfield__label" htmlFor="callCount">call count...</label>
 						  </div>
-				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn">download</button>
-				    	<button className="mdl-button mdl-js-button mdl-js-ripple-effect preview_btn">preview</button>
+				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" onClick={this._download}>download</button>
+				    	<button className="mdl-button mdl-js-button mdl-js-ripple-effect preview_btn" onClick={this._preview}>preview</button>
 				    </div>
 
 			    </div>
 			  </main>
 			</div>
 		)
+	}
+
+	_create = () => {
+		AppActions.create()
+	}
+
+	_destroy = (id) => {
+		AppActions.destroy(id);
+	}
+
+	_download = () => {
+		console.log("download button")
+	}
+
+	_preview = () => {
+		console.log("preview button")
 	}
 
 	_onChange = () => {
