@@ -5,7 +5,7 @@
 	})
 
 	$("#sortable").sortable({
-		revert: true
+		revert: false
 	});
 	$("#sortable tr").disableSelection();
 

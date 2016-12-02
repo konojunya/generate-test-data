@@ -3,48 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test Data Generator</title>
-	<link rel="stylesheet" type="text/css" href="./stylesheets/material.min.css">
+	<link rel="stylesheet" type="text/css" href="./dist/stylesheets/material.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="./dist/stylesheets/style.css">
 </head>
 <body>
 
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-	  <header class="mdl-layout__header">
-	    <div class="mdl-layout__header-row">
-	      <span class="mdl-layout-title">Test Data Generator</span>
-	    </div>
-	  </header>
-	  <main class="mdl-layout__content">
-	    <div class="page-content">
+	<div id="react"></div>
 
-	    	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-				  <thead>
-				    <tr>
-				      <th class="mdl-data-table__cell--non-numeric">Field Name</th>
-				      <th>Type</th>
-				    </tr>
-				  </thead>
-				  <tbody id="sortable">
-				    <tr class="ui-state-default">
-				      <td class="mdl-data-table__cell--non-numeric">Name</td>
-				      <td>name</td>
-				      <td><i class="material-icons">clear</i></td>
-				    </tr>
-				  </tbody>
-				</table>
-
-		    <!-- <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent connection_btn">
-		    	通信
-				</button> -->
-
-	    </div>
-	  </main>
-	</div>
-
-	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="./javascripts/material.min.js"></script>
-	<script type="text/javascript" src="./javascripts/main.js"></script>
+	<script type="text/javascript" src="./dist/javascripts/bundle.js"></script>
 </body>
 </html>
