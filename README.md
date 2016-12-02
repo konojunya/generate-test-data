@@ -6,6 +6,14 @@
 $ composer install && npm install
 ```
 
+```
+$ npm run dev
+```
+
+```
+$ php -S localhost:<port>
+```
+
 ***参考サイト***
 
 [mockaroo](https://www.mockaroo.com/)
