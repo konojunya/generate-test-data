@@ -21525,6 +21525,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Header = __webpack_require__(179);
+
+	var _Header2 = _interopRequireDefault(_Header);
+
+	var _TableCell = __webpack_require__(180);
+
+	var _TableCell2 = _interopRequireDefault(_TableCell);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21546,9 +21554,44 @@
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
-					"h1",
-					null,
-					"Hello"
+					"div",
+					{ className: "mdl-layout mdl-js-layout mdl-layout--fixed-header" },
+					_react2.default.createElement(_Header2.default, null),
+					_react2.default.createElement(
+						"main",
+						{ className: "mdl-layout__content" },
+						_react2.default.createElement(
+							"div",
+							{ className: "page-content" },
+							_react2.default.createElement(
+								"table",
+								{ className: "mdl-data-table mdl-js-data-table mdl-shadow--2dp", id: "table" },
+								_react2.default.createElement(
+									"thead",
+									null,
+									_react2.default.createElement(
+										"tr",
+										null,
+										_react2.default.createElement(
+											"th",
+											{ className: "mdl-data-table__cell--non-numeric" },
+											"Field Name"
+										),
+										_react2.default.createElement(
+											"th",
+											null,
+											"Type"
+										)
+									)
+								),
+								_react2.default.createElement(
+									"tbody",
+									{ id: "sortable" },
+									_react2.default.createElement(_TableCell2.default, null)
+								)
+							)
+						)
+					)
 				);
 			}
 		}]);
@@ -21557,6 +21600,147 @@
 	}(_react2.default.Component);
 
 	exports.default = App;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Header = function (_React$Component) {
+		_inherits(Header, _React$Component);
+
+		function Header() {
+			_classCallCheck(this, Header);
+
+			return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+		}
+
+		_createClass(Header, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"header",
+					{ className: "mdl-layout__header" },
+					_react2.default.createElement(
+						"div",
+						{ className: "mdl-layout__header-row" },
+						_react2.default.createElement(
+							"span",
+							{ className: "mdl-layout-title" },
+							"Test Data Generator"
+						)
+					)
+				);
+			}
+		}]);
+
+		return Header;
+	}(_react2.default.Component);
+
+	exports.default = Header;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TableCell = function (_React$Component) {
+		_inherits(TableCell, _React$Component);
+
+		function TableCell() {
+			_classCallCheck(this, TableCell);
+
+			return _possibleConstructorReturn(this, (TableCell.__proto__ || Object.getPrototypeOf(TableCell)).apply(this, arguments));
+		}
+
+		_createClass(TableCell, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"tr",
+					{ className: "ui-state-default" },
+					_react2.default.createElement(
+						"td",
+						{ className: "mdl-data-table__cell--non-numeric" },
+						_react2.default.createElement(
+							"div",
+							{ className: "mdl-textfield mdl-js-textfield" },
+							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text" }),
+							_react2.default.createElement(
+								"label",
+								{ className: "mdl-textfield__label" },
+								"Text..."
+							)
+						)
+					),
+					_react2.default.createElement(
+						"td",
+						null,
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" },
+							"name1"
+						)
+					),
+					_react2.default.createElement(
+						"td",
+						{ className: "delete_btn" },
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" },
+							_react2.default.createElement(
+								"i",
+								{ className: "material-icons" },
+								"clear"
+							)
+						)
+					)
+				);
+			}
+		}]);
+
+		return TableCell;
+	}(_react2.default.Component);
+
+	exports.default = TableCell;
 
 /***/ }
 /******/ ]);
