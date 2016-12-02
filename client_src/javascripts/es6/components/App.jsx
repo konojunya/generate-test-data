@@ -6,6 +6,7 @@ import TableCell from "./TableCell.jsx"
 export default class App extends React.Component{
 
 	render(){
+
 		return(
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				<Header/>
@@ -19,7 +20,7 @@ export default class App extends React.Component{
 						      <th>Type</th>
 						    </tr>
 						  </thead>
-						  <tbody id="sortable">
+						  <tbody>
 
 						    <TableCell/>
 

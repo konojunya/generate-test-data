@@ -3,8 +3,9 @@ import React from "react"
 export default class TableCell extends React.Component{
 
 	render(){
+
 		return(
-			<tr className="ui-state-default">
+			<tr className="list-item">
 	      <td className="mdl-data-table__cell--non-numeric">
 	      	<div className="mdl-textfield mdl-js-textfield">
 				    <input className="mdl-textfield__input" type="text"/>
@@ -13,7 +14,7 @@ export default class TableCell extends React.Component{
 	      </td>
 	      <td>
 	      	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-	      		name1
+	      		name
 	      	</button>
 	      </td>
 	      <td className="delete_btn">
