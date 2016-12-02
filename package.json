@@ -1,0 +1,24 @@
+{
+  "name": "generate-test-data",
+  "version": "1.0.0",
+  "description": "***参考サイト*** [mockaroo](https://www.mockaroo.com/) [ダミーデータ生成ライブラリの解説ページ](http://blog.asial.co.jp/1279)",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konojunya/generate-test-data.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konojunya/generate-test-data/issues"
+  },
+  "homepage": "https://github.com/konojunya/generate-test-data#readme"
+}
