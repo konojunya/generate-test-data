@@ -4,6 +4,11 @@
 		connection()
 	})
 
+	$("#sortable").sortable({
+		revert: true
+	});
+	$("#sortable tr").disableSelection();
+
 
 	/*
 	*		connection
@@ -22,7 +27,8 @@
 					{ fieldName: "passwd", type: "password" },
 					{ fieldName: "age", type: "randomDigit" }
 				],
-				callCount: 10
+				callCount: 10,
+				tableName: "MOCK"
 			}
 		})
 		.fail(function(err){

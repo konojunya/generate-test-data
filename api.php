@@ -2,7 +2,7 @@
 
 require_once "vendor/autoload.php";
 
-$tableName = "mock_data";
+$tableName = $_POST["tableName"] || "mock_data";
 $reqData = $_POST["reqData"];
 $callCount = $_POST["callCount"];
 
