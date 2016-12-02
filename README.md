@@ -19,3 +19,5 @@ $ composer install && npm install
 [Material Design Lite](https://getmdl.io)
 
 [react sortable](https://github.com/clauderic/react-sortable-hoc)
+
+[Facebook/Flux](https://github.com/facebook/flux)
