@@ -1,6 +1,14 @@
 import React from "react"
+import AppActions from "../actions/AppActions"
 
 export default class TableCell extends React.Component{
+
+	constructor(props){
+		super(props)
+		this.state = {
+			value: ""
+		}
+	}
 
 	render(){
 
@@ -8,8 +16,7 @@ export default class TableCell extends React.Component{
 			<tr className="list-item">
 	      <td className="mdl-data-table__cell--non-numeric">
 	      	<div className="mdl-textfield mdl-js-textfield">
-				    <input className="mdl-textfield__input" type="text" onKeyDown={this._changeFieldName} value={this.props.field_data.name}/>
-				    <label className="mdl-textfield__label">Text...</label>
+				    <input className="mdl-textfield__input" type="text" onChange={this._changeFieldName} value={this.state.value} autoFocus={true} data-id={this.props.field_data.id}/>
 				  </div>
 	      </td>
 	      <td>
@@ -26,8 +33,12 @@ export default class TableCell extends React.Component{
 		)
 	}
 
-	_changeFieldName = () => {
-		console.log("change name")
+	_changeFieldName = (e) => {
+		var _t = e.target
+		this.setState({
+			value: _t.value
+		})
+		AppActions.update_field_name(_t.dataset.id,_t.value)
 	}
 
 	_onChangeFieldType = () => {
@@ -37,7 +48,7 @@ export default class TableCell extends React.Component{
 	_destory = (e) => {
 		var target = e.target,
 				id = target.dataset.id || target.parentNode.dataset.id;
-		this.props.destroy_action(id)
+		AppActions.destroy(id);
 	}
 
 }

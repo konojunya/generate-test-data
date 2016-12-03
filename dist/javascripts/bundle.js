@@ -1,3 +1,4 @@
+module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -21547,6 +21548,10 @@
 
 	var _TableCell2 = _interopRequireDefault(_TableCell);
 
+	var _AppWebAPIUtils = __webpack_require__(194);
+
+	var _AppWebAPIUtils2 = _interopRequireDefault(_AppWebAPIUtils);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21556,9 +21561,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var getAppState = function getAppState() {
-		return {
-			allFields: _AppStore2.default.getAll()
-		};
+		return _AppStore2.default.getAll();
 	};
 
 	var App = function (_React$Component) {
@@ -21573,23 +21576,40 @@
 				_AppActions2.default.create();
 			};
 
-			_this._destroy = function (id) {
-				_AppActions2.default.destroy(id);
-			};
-
 			_this._download = function () {
 				console.log("download button");
 			};
 
 			_this._preview = function () {
-				console.log("preview button");
+				var data = {
+					reqData: _this.state.allFields,
+					count: _this.state.callCount,
+					tableName: _this.state.tableName
+				};
+				_AppWebAPIUtils2.default.requestApi(data);
+			};
+
+			_this._changeCallCount = function (e) {
+				_this.setState({
+					callCount: e.target.value
+				});
+			};
+
+			_this._changeTableName = function (e) {
+				_this.setState({
+					tableName: e.target.value
+				});
 			};
 
 			_this._onChange = function () {
 				_this.setState(getAppState());
 			};
 
-			_this.state = getAppState();
+			_this.state = {
+				allFields: getAppState(),
+				callCount: 10,
+				tableName: "MOCK_TABLE"
+			};
 			return _this;
 		}
 
@@ -21611,7 +21631,7 @@
 				    allFields = this.state.allFields;
 
 				for (var key in allFields) {
-					list.push(_react2.default.createElement(_TableCell2.default, { key: key, field_data: allFields[key], destroy_action: this._destroy }));
+					list.push(_react2.default.createElement(_TableCell2.default, { key: key, field_data: allFields[key] }));
 				}
 
 				return _react2.default.createElement(
@@ -21645,7 +21665,8 @@
 												"th",
 												null,
 												"Type"
-											)
+											),
+											_react2.default.createElement("th", null)
 										)
 									),
 									_react2.default.createElement(
@@ -21666,13 +21687,27 @@
 								_react2.default.createElement(
 									"div",
 									{ className: "mdl-textfield mdl-js-textfield call-count-box" },
-									_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", pattern: "-?[0-9]*(\\.[0-9]+)?", id: "callCount" }),
 									_react2.default.createElement(
 										"label",
-										{ className: "mdl-textfield__label", htmlFor: "callCount" },
-										"call count..."
-									)
+										{ htmlFor: "tableName" },
+										"Table Name"
+									),
+									_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", id: "tableName", value: this.state.tableName, placeholder: "MOCK_TABLE", onChange: this._changeTableName })
 								),
+								_react2.default.createElement(
+									"div",
+									{ className: "mdl-textfield mdl-js-textfield call-count-box" },
+									_react2.default.createElement(
+										"label",
+										{ htmlFor: "callCount" },
+										"Rows"
+									),
+									_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", pattern: "-?[0-9]*(\\.[0-9]+)?", id: "callCount", value: this.state.callCount, placeholder: "10", onChange: this._changeCallCount })
+								)
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "settings" },
 								_react2.default.createElement(
 									"button",
 									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn", onClick: this._download },
@@ -21730,8 +21765,12 @@
 		_fields[id] = {
 			id: id,
 			type: "name",
-			name: ""
+			fieldName: ""
 		};
+	};
+
+	var update = function update(id, updates) {
+		_fields[id] = (0, _objectAssign2.default)({}, _fields[id], updates);
 	};
 
 	var destroy = function destroy(id) {
@@ -21765,6 +21804,22 @@
 			case _AppConstants2.default.DESTROY:
 				destroy(action.id);
 				AppStore.emitChange();
+				break;
+
+			case _AppConstants2.default.UPDATE_FIELD_NAME:
+				var name = action.name.trim();
+				if (name !== "") {
+					update(action.id, { fieldName: name });
+					AppStore.emitChange();
+				}
+				break;
+
+			case _AppConstants2.default.UPDATE_FIELD_TYPE:
+				var type = action.type.trim();
+				if (type !== "") {
+					update(action.id, { type: type });
+					AppStore.emitChange();
+				}
 				break;
 
 			default:
@@ -22337,8 +22392,8 @@
 	var AppConstants = {
 		CREATE: "CREATE",
 		DESTROY: "DESTROY",
-		CHANGE_FIELD_NAME: "CHANGE_FIELD_NAME",
-		CHANGE_FIELD_TYPE: "CHANGE_FIELD_TYPE"
+		UPDATE_FIELD_NAME: "UPDATE_FIELD_NAME",
+		UPDATE_FIELD_TYPE: "UPDATE_FIELD_TYPE"
 	};
 
 	exports.default = AppConstants;
@@ -22375,15 +22430,17 @@
 				id: id
 			});
 		},
-		change_field_name: function change_field_name(name) {
+		update_field_name: function update_field_name(id, name) {
 			_AppDispatcher2.default.dispatch({
-				actionType: _AppConstants2.default.CHANGE_FIELD_NAME,
+				actionType: _AppConstants2.default.UPDATE_FIELD_NAME,
+				id: id,
 				name: name
 			});
 		},
-		change_field_type: function change_field_type(type) {
+		update_field_type: function update_field_type(id, type) {
 			_AppDispatcher2.default.dispatch({
-				actionType: _AppConstants2.default.CHANGE_FIELD_TYPE,
+				actionType: _AppConstants2.default.UPDATE_FIELD_TYPE,
+				id: id,
 				type: type
 			});
 		}
@@ -22464,6 +22521,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _AppActions = __webpack_require__(185);
+
+	var _AppActions2 = _interopRequireDefault(_AppActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22475,26 +22536,33 @@
 	var TableCell = function (_React$Component) {
 		_inherits(TableCell, _React$Component);
 
-		function TableCell() {
-			var _ref;
-
-			var _temp, _this, _ret;
-
+		function TableCell(props) {
 			_classCallCheck(this, TableCell);
 
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
+			var _this = _possibleConstructorReturn(this, (TableCell.__proto__ || Object.getPrototypeOf(TableCell)).call(this, props));
 
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TableCell.__proto__ || Object.getPrototypeOf(TableCell)).call.apply(_ref, [this].concat(args))), _this), _this._changeFieldName = function () {
-				console.log("change name");
-			}, _this._onChangeFieldType = function () {
+			_this._changeFieldName = function (e) {
+				var _t = e.target;
+				_this.setState({
+					value: _t.value
+				});
+				_AppActions2.default.update_field_name(_t.dataset.id, _t.value);
+			};
+
+			_this._onChangeFieldType = function () {
 				console.log("changeFieldType button");
-			}, _this._destory = function (e) {
+			};
+
+			_this._destory = function (e) {
 				var target = e.target,
 				    id = target.dataset.id || target.parentNode.dataset.id;
-				_this.props.destroy_action(id);
-			}, _temp), _possibleConstructorReturn(_this, _ret);
+				_AppActions2.default.destroy(id);
+			};
+
+			_this.state = {
+				value: ""
+			};
+			return _this;
 		}
 
 		_createClass(TableCell, [{
@@ -22510,12 +22578,7 @@
 						_react2.default.createElement(
 							"div",
 							{ className: "mdl-textfield mdl-js-textfield" },
-							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", onKeyDown: this._changeFieldName, value: this.props.field_data.name }),
-							_react2.default.createElement(
-								"label",
-								{ className: "mdl-textfield__label" },
-								"Text..."
-							)
+							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", onChange: this._changeFieldName, value: this.state.value, autoFocus: true, "data-id": this.props.field_data.id })
 						)
 					),
 					_react2.default.createElement(
@@ -22922,6 +22985,50 @@
 	};
 
 	module.exports = keyOf;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _superagent = __webpack_require__(195);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var appWebAPIUtils = {
+		requestApi: function requestApi(state) {
+			_superagent2.default.post("../../api.php").send(this.convertToAjaxData(state)).end(function (err, res) {
+				if (err) console.log(err);
+				console.log(res);
+			});
+		},
+		convertToAjaxData: function convertToAjaxData(state) {
+			var data = {
+				reqData: [],
+				callCount: state.count,
+				tableName: state.tableName
+			};
+			for (var key in state.reqData) {
+				data.reqData.push(state.reqData[key]);
+			}
+			return data;
+		}
+	};
+
+	exports.default = appWebAPIUtils;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports) {
+
+	module.exports = require("superagent");
 
 /***/ }
 /******/ ]);

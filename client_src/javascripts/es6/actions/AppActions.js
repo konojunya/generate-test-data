@@ -16,16 +16,18 @@ var AppActions = {
 		})
 	},
 
-	change_field_name(name){
+	update_field_name(id,name){
 		AppDispatcher.dispatch({
-			actionType: AppConstants.CHANGE_FIELD_NAME,
+			actionType: AppConstants.UPDATE_FIELD_NAME,
+			id: id,
 			name: name
 		})
 	},
 
-	change_field_type(type){
+	update_field_type(id,type){
 		AppDispatcher.dispatch({
-			actionType: AppConstants.CHANGE_FIELD_TYPE,
+			actionType: AppConstants.UPDATE_FIELD_TYPE,
+			id: id,
 			type: type
 		})
 	}

@@ -11,6 +11,10 @@ body,html{
 	display: none;
 }
 
+.mdl-textfield__input{
+	outline: none!important;
+}
+
 /* list */
 #table{
 	width: 100%;
@@ -44,4 +48,8 @@ body,html{
 }
 .settings .download_btn{
 	margin-right: 10px;
+}
+.settings label{
+	font-size: 0.9rem;
+	color: #939393;
 }
