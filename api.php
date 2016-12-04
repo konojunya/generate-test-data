@@ -4,7 +4,9 @@ require_once "vendor/autoload.php";
 
 $tableName = $_POST["tableName"] || "mock_data";
 $reqData = $_POST["reqData"];
-$callCount = $_POST["callCount"];
+$callCount = $_POST["callCount"] || 10;
+
+// file_put_contents("req.txt",$callCount);
 
 /*
 *		Factoryクラスを使用する

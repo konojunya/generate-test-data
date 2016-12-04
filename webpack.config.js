@@ -27,7 +27,7 @@ module.exports = {
     new webpack.DefinePlugin({ "global.GENTLY": false })
   ],
   externals: {
-    "superagent": true
+    "superagent": false
   },
   debug: true
 };

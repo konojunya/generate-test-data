@@ -25,7 +25,7 @@ export default class TableCell extends React.Component{
 	      	</button>
 	      </td>
 	      <td className="delete_btn">
-	      	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this._destory} data-id={this.props.field_data.id}>
+	      	<button className="mdl-button mdl-js-button mdl-js-ripple-effect" onClick={this._destory} data-id={this.props.field_data.id}>
 	      		<i className="material-icons">clear</i>
 	      	</button>
 	      </td>
