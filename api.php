@@ -2,11 +2,11 @@
 
 require_once "vendor/autoload.php";
 
-$tableName = $_POST["tableName"] || "mock_data";
-$reqData = $_POST["reqData"];
-$callCount = $_POST["callCount"] || 10;
+header('Content-Type: application/json');
 
-// file_put_contents("req.txt",$callCount);
+$tableName = $_POST["tableName"];
+$reqData = $_POST["reqData"];
+$callCount = $_POST["callCount"];
 
 /*
 *		Factoryクラスを使用する

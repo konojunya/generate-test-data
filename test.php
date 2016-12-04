@@ -1,7 +1,9 @@
 <?php
 
-$array = array(
-	"hoge" => 1
-);
+header('Content-Type: application/json');
 
-echo gettype($array);
+echo json_encode(array(
+	"tableName" => $_POST["tableName"],
+	"callCount" => $_POST["callCount"],
+	"reqData" => $_POST["reqData"]
+));

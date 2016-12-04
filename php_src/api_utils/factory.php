@@ -17,6 +17,7 @@ class Factory{
 	*		@return { String } row_data PHPのオブジェクトなのでsql文へ変換する
 	*/
 	public function getFakeData($rawDataObject){
+		error_log(print_r($rawDataObject,true),"3","./req.log");
 		$row_data = $this->getFakerRow($rawDataObject);
 		return $this->convert_to_sql($row_data);
 	}
@@ -29,11 +30,13 @@ class Factory{
 	*/
 	private function getFakerRow($rawDataArray){
 		foreach ($rawDataArray as $key => $value):
+			error_log(print_r($key,true),"3","./req.log");
 			$return_row[$key] = array(
 				'fieldName' => $value['fieldName'],
 				'value' => $this->faker->$value['type']
 			);
 		endforeach;
+		error_log(print_r($return_row,true),"3","./req.log");
 		return $return_row;
 	}
 
