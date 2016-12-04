@@ -1,11 +1,15 @@
 var webpack = require("webpack")
 var path = require("path")
+
 module.exports = {
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   entry: "./client_src/javascripts/es6/app.js",
   output: {
     path: __dirname + "/dist/javascripts",
     filename: 'bundle.js',
-    libraryTarget: "commonjs2"
+    libraryTarget: "umd"
   },
   module: {
     loaders: [
@@ -23,7 +27,7 @@ module.exports = {
     new webpack.DefinePlugin({ "global.GENTLY": false })
   ],
   externals: {
-    "superagent": 'superagent'
+    "superagent": true
   },
   debug: true
 };
