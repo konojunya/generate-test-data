@@ -27,10 +27,3 @@ for($i=0;$i<$callCount;$i++){
 echo json_encode(array(
 	"sql" => $sql_text
 ));
-
-先輩。昨日のやつなんですけどform dataで送ることで一旦解決していたんですが、そうしてしまうと
-[ {data: "aaa"},{data: "bbb"} ] というようなデータをおくりたいときに、data="aaa"?data="bbb"になってしまって、上書きされてしまいます。なのでContent-Typeはapplication/jsonで送って、phpの取得時に$_POSTでは取得できない生のPOSTデータを取得する必要がありました。
-取得方法としてはphp://inputをfile_get_contentsで取得してこの形はjsのobjectの形（{name: "hoge",age: 19}）になっているので、json_decode()を使ってデコードしないと行けなかったです。
-
-$php_input = 
-$json_data = json_decode(file_get_contents("php://input"))

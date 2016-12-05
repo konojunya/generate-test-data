@@ -5,6 +5,7 @@ import AppActions from "../actions/AppActions"
 
 import Header from "./Header.jsx"
 import TableCell from "./TableCell.jsx"
+import Overlay from "./Overlay.jsx"
 
 import appWebAPIUtils from "../utils/AppWebAPIUtils"
 
@@ -19,7 +20,8 @@ export default class App extends React.Component{
 		this.state = {
 			allFields: getAppState(),
 			callCount: 10,
-			tableName: "MOCK_TABLE"
+			tableName: "MOCK_TABLE",
+			isShowOverlay: false
 		}
 	}
 
@@ -37,7 +39,14 @@ export default class App extends React.Component{
 				allFields = this.state.allFields;
 
 		for(var key in allFields){
-			list.push(<TableCell key={key} field_data={allFields[key]}/>)
+			list.push(
+				<TableCell
+					key={key}
+					field_data={allFields[key]}
+					toggleOverlay={this._toggleOverlay}
+					isShowFlg={this.state.isShowOverlay}
+				/>
+			)
 		}
 
 		return(
@@ -78,11 +87,14 @@ export default class App extends React.Component{
 						</div>
 				    <div className="settings">
 				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" onClick={this._download}>download</button>
-				    	<button className="mdl-button mdl-js-button mdl-js-ripple-effect preview_btn" onClick={this._preview}>preview</button>
+				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect preview_btn" onClick={this._preview}>preview</button>
 				    </div>
 
 			    </div>
 			  </main>
+
+			  <Overlay show={this.state.isShowOverlay} toggleOverlay={this._toggleOverlay}/>
+
 			</div>
 		)
 	}
@@ -113,6 +125,12 @@ export default class App extends React.Component{
 	_changeTableName = (e) => {
 		this.setState({
 			tableName: e.target.value
+		})
+	}
+
+	_toggleOverlay = (flg) => {
+		this.setState({
+			isShowOverlay: flg
 		})
 	}
 

@@ -6,6 +6,7 @@ import assign from "object-assign"
 const CHANGE_EVENT = "change";
 
 var _fields = {};
+var _currentId = "";
 
 var create = () => {
 	var id = (+new Date() + ~(Math.random()*999999)).toString(36)
@@ -24,10 +25,18 @@ var destroy = (id) => {
 	delete _fields[id];
 }
 
+var changeTableId = (id) => {
+	_currentId = id;
+}
+
 var AppStore = assign({},EventEmitter.prototype,{
 
 	getAll(){
 		return _fields
+	},
+
+	getCurrentTableId(){
+		return _currentId
 	},
 
 	emitChange(){
@@ -72,6 +81,11 @@ AppDispatcher.register((action)=>{
 				update(action.id,{type: type})
 				AppStore.emitChange()
 			}
+			break;
+
+		case AppConstants.UPDATE_TABLE_ID:
+			changeTableId(action.id)
+			AppStore.emitChange()
 			break;
 
 		default:

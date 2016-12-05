@@ -21557,6 +21557,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _TableCell2 = _interopRequireDefault(_TableCell);
 
+	var _Overlay = __webpack_require__(200);
+
+	var _Overlay2 = _interopRequireDefault(_Overlay);
+
 	var _AppWebAPIUtils = __webpack_require__(188);
 
 	var _AppWebAPIUtils2 = _interopRequireDefault(_AppWebAPIUtils);
@@ -21610,6 +21614,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				});
 			};
 
+			_this._toggleOverlay = function (flg) {
+				_this.setState({
+					isShowOverlay: flg
+				});
+			};
+
 			_this._onChange = function () {
 				_this.setState(getAppState());
 			};
@@ -21617,7 +21627,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			_this.state = {
 				allFields: getAppState(),
 				callCount: 10,
-				tableName: "MOCK_TABLE"
+				tableName: "MOCK_TABLE",
+				isShowOverlay: false
 			};
 			return _this;
 		}
@@ -21640,7 +21651,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				    allFields = this.state.allFields;
 
 				for (var key in allFields) {
-					list.push(_react2.default.createElement(_TableCell2.default, { key: key, field_data: allFields[key] }));
+					list.push(_react2.default.createElement(_TableCell2.default, {
+						key: key,
+						field_data: allFields[key],
+						toggleOverlay: this._toggleOverlay,
+						isShowFlg: this.state.isShowOverlay
+					}));
 				}
 
 				return _react2.default.createElement(
@@ -21724,12 +21740,13 @@ return /******/ (function(modules) { // webpackBootstrap
 								),
 								_react2.default.createElement(
 									"button",
-									{ className: "mdl-button mdl-js-button mdl-js-ripple-effect preview_btn", onClick: this._preview },
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect preview_btn", onClick: this._preview },
 									"preview"
 								)
 							)
 						)
-					)
+					),
+					_react2.default.createElement(_Overlay2.default, { show: this.state.isShowOverlay, toggleOverlay: this._toggleOverlay })
 				);
 			}
 		}]);
@@ -21768,6 +21785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var CHANGE_EVENT = "change";
 
 	var _fields = {};
+	var _currentId = "";
 
 	var create = function create() {
 		var id = (+new Date() + ~(Math.random() * 999999)).toString(36);
@@ -21786,9 +21804,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		delete _fields[id];
 	};
 
+	var changeTableId = function changeTableId(id) {
+		_currentId = id;
+	};
+
 	var AppStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
 		getAll: function getAll() {
 			return _fields;
+		},
+		getCurrentTableId: function getCurrentTableId() {
+			return _currentId;
 		},
 		emitChange: function emitChange() {
 			this.emit(CHANGE_EVENT);
@@ -21829,6 +21854,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					update(action.id, { type: type });
 					AppStore.emitChange();
 				}
+				break;
+
+			case _AppConstants2.default.UPDATE_TABLE_ID:
+				changeTableId(action.id);
+				AppStore.emitChange();
 				break;
 
 			default:
@@ -22402,7 +22432,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		CREATE: "CREATE",
 		DESTROY: "DESTROY",
 		UPDATE_FIELD_NAME: "UPDATE_FIELD_NAME",
-		UPDATE_FIELD_TYPE: "UPDATE_FIELD_TYPE"
+		UPDATE_FIELD_TYPE: "UPDATE_FIELD_TYPE",
+		UPDATE_TABLE_ID: "UPDATE_TABLE_ID"
 	};
 
 	exports.default = AppConstants;
@@ -22451,6 +22482,12 @@ return /******/ (function(modules) { // webpackBootstrap
 				actionType: _AppConstants2.default.UPDATE_FIELD_TYPE,
 				id: id,
 				type: type
+			});
+		},
+		changeTableId: function changeTableId(id) {
+			_AppDispatcher2.default.dispatch({
+				actionType: _AppConstants2.default.UPDATE_TABLE_ID,
+				id: id
 			});
 		}
 	};
@@ -22550,7 +22587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			var _this = _possibleConstructorReturn(this, (TableCell.__proto__ || Object.getPrototypeOf(TableCell)).call(this, props));
 
-			_this._changeFieldName = function (e) {
+			_this._onChangeFieldName = function (e) {
 				var _t = e.target;
 				_this.setState({
 					value: _t.value
@@ -22558,8 +22595,9 @@ return /******/ (function(modules) { // webpackBootstrap
 				_AppActions2.default.update_field_name(_t.dataset.id, _t.value);
 			};
 
-			_this._onChangeFieldType = function () {
-				console.log("changeFieldType button");
+			_this._toggleOverlay = function (e) {
+				_this.props.toggleOverlay(!_this.props.isShowFlg);
+				_AppActions2.default.changeTableId(e.target.dataset.id);
 			};
 
 			_this._destory = function (e) {
@@ -22587,7 +22625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						_react2.default.createElement(
 							"div",
 							{ className: "mdl-textfield mdl-js-textfield" },
-							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", onChange: this._changeFieldName, value: this.state.value, autoFocus: true, "data-id": this.props.field_data.id })
+							_react2.default.createElement("input", { className: "mdl-textfield__input", type: "text", onChange: this._onChangeFieldName, value: this.state.value, autoFocus: true, "data-id": this.props.field_data.id })
 						)
 					),
 					_react2.default.createElement(
@@ -22595,7 +22633,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						null,
 						_react2.default.createElement(
 							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", onClick: this._onChangeFieldType, "data-type": this.props.field_data.type },
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", "data-id": this.props.field_data.id, onClick: this._toggleOverlay, "data-type": this.props.field_data.type },
 							this.props.field_data.type
 						)
 					),
@@ -22639,12 +22677,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var appWebAPIUtils = {
 		requestApi: function requestApi(state) {
-			console.log(state);
-			console.log(this.convertToAjaxData(state));
 			_superagent2.default.post("http://localhost:8989/api.php").send(this.convertToAjaxData(state)).end(function (err, res) {
 				if (err) console.log(err);
 				var json_data = JSON.parse(res.text);
-				console.log(json_data.sql);
+				json_data.sql.map(function (txt) {
+					console.log(txt);
+				});
 			});
 		},
 		convertToAjaxData: function convertToAjaxData(state) {
@@ -24729,6 +24767,198 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = keyOf;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _AppActions = __webpack_require__(185);
+
+	var _AppActions2 = _interopRequireDefault(_AppActions);
+
+	var _AppStore = __webpack_require__(179);
+
+	var _AppStore2 = _interopRequireDefault(_AppStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var getCurrentTableId = function getCurrentTableId() {
+		return _AppStore2.default.getCurrentTableId();
+	};
+
+	var Overlay = function (_React$Component) {
+		_inherits(Overlay, _React$Component);
+
+		function Overlay(props) {
+			_classCallCheck(this, Overlay);
+
+			var _this = _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).call(this, props));
+
+			_this._changeFieldType = function (e) {
+				_AppActions2.default.update_field_type(getCurrentTableId(), e.target.parentNode.dataset.fieldtype);
+				_this.props.toggleOverlay(!_this.props.show);
+			};
+
+			return _this;
+		}
+
+		_createClass(Overlay, [{
+			key: "render",
+			value: function render() {
+
+				return _react2.default.createElement(
+					"div",
+					{ className: "overlay " + (this.props.show ? '' : 'hidden') },
+					_react2.default.createElement(
+						"div",
+						{ className: "type-menu" },
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "name" },
+							"name"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
+							"userName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "password" },
+							"password"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "email" },
+							"email"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "freeEmail" },
+							"freeEmail"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
+							"userName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "domainName" },
+							"domainName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "url" },
+							"url"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv4" },
+							"ipv4"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv6" },
+							"ipv6"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "macAddress" },
+							"macAddress"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "phoneNumber" },
+							"phoneNumber"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "randomDigitNotNull" },
+							"randomDigitNotNull"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "realText" },
+							"realText"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userAgent" },
+							"userAgent"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "creditCardNumber" },
+							"creditCardNumber"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "hexcolor" },
+							"hexcolor"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "rgbcolor" },
+							"rgbcolor"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "colorName" },
+							"colorName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "uuid" },
+							"uuid"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "sha1" },
+							"sha1"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "imageUrl" },
+							"imageUrl"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "company" },
+							"company"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "address" },
+							"address"
+						)
+					)
+				);
+			}
+		}]);
+
+		return Overlay;
+	}(_react2.default.Component);
+
+	exports.default = Overlay;
 
 /***/ }
 /******/ ])

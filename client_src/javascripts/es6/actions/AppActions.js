@@ -30,6 +30,13 @@ var AppActions = {
 			id: id,
 			type: type
 		})
+	},
+
+	changeTableId(id){
+		AppDispatcher.dispatch({
+			actionType: AppConstants.UPDATE_TABLE_ID,
+			id: id
+		})
 	}
 }
 
