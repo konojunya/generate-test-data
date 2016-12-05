@@ -1,2 +1,4 @@
 node_modules/
 vendor/
+download_files/
+*.log

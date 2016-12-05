@@ -1,5 +1,0 @@
-Array
-(
-    [0] => insert into 'MOCK_TABLE' (hoge) values ('高橋 裕樹');
-    [1] => insert into 'MOCK_TABLE' (hoge) values ('佐々木 加奈');
-)
