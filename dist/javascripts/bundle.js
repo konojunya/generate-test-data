@@ -22639,9 +22639,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var appWebAPIUtils = {
 		requestApi: function requestApi(state) {
-			_superagent2.default.post("http://localhost:8989/api.php").send(this.convertToAjaxData(state)).set('Content-Type', 'application/x-www-form-urlencoded').end(function (err, res) {
+			console.log(state);
+			console.log(this.convertToAjaxData(state));
+			_superagent2.default.post("http://localhost:8989/api.php").send(this.convertToAjaxData(state)).end(function (err, res) {
 				if (err) console.log(err);
-				console.log(res);
+				var json_data = JSON.parse(res.text);
+				console.log(json_data.sql);
 			});
 		},
 		convertToAjaxData: function convertToAjaxData(state) {

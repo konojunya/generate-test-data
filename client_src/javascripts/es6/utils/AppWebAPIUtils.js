@@ -3,13 +3,15 @@ import request from "superagent"
 var appWebAPIUtils = {
 
 	requestApi(state){
+		console.log(state)
+		console.log(this.convertToAjaxData(state))
 		request
 			.post("http://localhost:8989/api.php")
 			.send(this.convertToAjaxData(state))
-			.set('Content-Type', 'application/x-www-form-urlencoded')
 			.end((err,res)=>{
 				if(err) console.log(err)
-				console.log(res)
+				var json_data = JSON.parse(res.text);
+				console.log(json_data.sql)
 			})
 	},
 

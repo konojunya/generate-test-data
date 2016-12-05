@@ -1,11 +1,5 @@
 Array
 (
-    [fieldName] => nae
-    [type] => name
+    [0] => insert into 'MOCK_TABLE' (hoge) values ('高橋 裕樹');
+    [1] => insert into 'MOCK_TABLE' (hoge) values ('佐々木 加奈');
 )
-Array
-(
-    [fieldName] => type
-    [type] => name
-)
-fieldName
