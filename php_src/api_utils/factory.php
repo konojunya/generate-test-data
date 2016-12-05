@@ -5,9 +5,11 @@ use Faker;
 
 class Factory{
 
-	public function __construct($tableName){
+	public function __construct($tableName,$callCount){
 		$this->tableName = $tableName;
+		$this->callCount = $callCount;
 		$this->faker = Faker\Factory::create("ja_JP");
+		$this->sql_text = [];
 	}
 
 	/*
@@ -17,8 +19,10 @@ class Factory{
 	*		@return { String } row_data PHPのオブジェクトなのでsql文へ変換する
 	*/
 	public function getFakeData($rawDataObject){
-		$row_data = $this->getFakerRow($rawDataObject);
-		return $this->convert_to_sql($row_data);
+		for($i=0;$i<$this->callCount;$i++){
+			$sql_text[] = $this->convert_to_sql($this->getFakerRow($rawDataObject));
+		}
+		return $sql_text;
 	}
 
 	/*

@@ -21589,17 +21589,17 @@ return /******/ (function(modules) { // webpackBootstrap
 				_AppActions2.default.create();
 			};
 
-			_this._download = function () {
-				console.log("download button");
-			};
-
-			_this._preview = function () {
+			_this._convertToRequestData = function () {
 				var data = {
 					reqData: _this.state.allFields,
 					count: _this.state.callCount,
 					tableName: _this.state.tableName
 				};
-				_AppWebAPIUtils2.default.requestApi(data);
+				return data;
+			};
+
+			_this._preview = function () {
+				_AppWebAPIUtils2.default.requestApi(_this._convertToRequestData());
 			};
 
 			_this._changeCallCount = function (e) {
@@ -21734,8 +21734,8 @@ return /******/ (function(modules) { // webpackBootstrap
 								"div",
 								{ className: "settings" },
 								_react2.default.createElement(
-									"button",
-									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn", onClick: this._download },
+									"a",
+									{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" },
 									"download"
 								),
 								_react2.default.createElement(
@@ -22680,9 +22680,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			_superagent2.default.post("http://localhost:8989/api.php").send(this.convertToAjaxData(state)).end(function (err, res) {
 				if (err) console.log(err);
 				var json_data = JSON.parse(res.text);
-				json_data.sql.map(function (txt) {
-					console.log(txt);
-				});
+				console.log(json_data);
+				console.log("http://localhost:8989/download.php?target=" + json_data.link);
 			});
 		},
 		convertToAjaxData: function convertToAjaxData(state) {

@@ -1,6 +1,5 @@
 <?php
-
-require_once "vendor/autoload.php";
+require "vendor/autoload.php";
 
 header('Content-Type: application/json');
 
@@ -15,15 +14,17 @@ $callCount = $json_data->callCount;
 *		Factoryクラスを使用する
 *		@param { String } テーブル名を入力する。	
 */
-$app = new App\api_utils\Factory($tableName);
+$app = new App\api_utils\Factory($tableName,$callCount);
 
-$sql_text = [];
-
-/* 指定回数分コールしてSQL文の配列を生成する */
-for($i=0;$i<$callCount;$i++){
-	$sql_text[] = $app->getFakeData($reqData);
+$return_data = $app->getFakeData($reqData);
+$sql_text = "";
+foreach($return_data as $value){
+	$sql_text .= $value."\n";
 }
-
+$key = uniqid("file_");
+file_put_contents("./download_files/".$key.".sql",$sql_text);
 echo json_encode(array(
-	"sql" => $sql_text
+	"link" => $key,
+	"sql" => $return_data
 ));
+exit;

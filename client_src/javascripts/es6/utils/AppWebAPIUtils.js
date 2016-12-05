@@ -9,9 +9,8 @@ var appWebAPIUtils = {
 			.end((err,res)=>{
 				if(err) console.log(err)
 				var json_data = JSON.parse(res.text);
-				json_data.sql.map((txt)=>{
-					console.log(txt)
-				})
+				console.log(json_data)
+				console.log("http://localhost:8989/download.php?target="+json_data.link)
 			})
 	},
 
@@ -19,7 +18,7 @@ var appWebAPIUtils = {
 		var data = {
 			reqData: [],
 			callCount: state.count,
-			tableName: state.tableName 	
+			tableName: state.tableName
 		}
 		for(var key in state.reqData){
 			data.reqData.push({

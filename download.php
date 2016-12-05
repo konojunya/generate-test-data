@@ -1,9 +1,8 @@
 <?php
 
-
-
-header('Content-Description: File Transfer');
-header('Content-Type: text/plain');
-header('Content-Disposition: attachment; filename=test.sql');
-echo mb_convert_encoding($str, "SJIS", "UTF-8");
-exit;
+$filepath = "./download_files/".$_GET["target"].'.sql';
+header('Content-Type: application/force-download');
+header('Content-Length: '.filesize($filepath));
+header('Content-Disposition: attachment; filename=TEST_DATA.sql');
+readfile($filepath);
+unlink($filepath);
