@@ -22680,7 +22680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			_superagent2.default.post("http://localhost:8989/api.php").send(this.convertToAjaxData(state)).end(function (err, res) {
 				if (err) console.log(err);
 				var json_data = JSON.parse(res.text);
-				console.log(json_data);
+				console.log(json_data.sql);
 				console.log("http://localhost:8989/download.php?target=" + json_data.link);
 			});
 		},
