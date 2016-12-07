@@ -86,7 +86,7 @@ export default class App extends React.Component{
 						  </div>
 						</div>
 				    <div className="settings">
-				    	<a className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn">download</a>
+				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored download_btn" onClick={this._download}>download</button>
 				    	<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect preview_btn" onClick={this._preview}>preview</button>
 				    </div>
 
@@ -113,7 +113,11 @@ export default class App extends React.Component{
 	}
 
 	_preview = () => {
-		appWebAPIUtils.requestApi(this._convertToRequestData());
+		appWebAPIUtils.requestApi(this._convertToRequestData(),false);
+	}
+
+	_download = () => {
+		appWebAPIUtils.requestApi(this._convertToRequestData(),true)
 	}
 
 	_changeCallCount = (e) => {

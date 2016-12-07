@@ -2,7 +2,7 @@ import request from "superagent"
 
 var appWebAPIUtils = {
 
-	requestApi(state){
+	requestApi(state,needToDonwload){
 		request
 			.post("http://localhost:8989/api.php")
 			.send(this.convertToAjaxData(state))
@@ -10,7 +10,9 @@ var appWebAPIUtils = {
 				if(err) console.log(err)
 				var json_data = JSON.parse(res.text);
 				console.log(json_data.sql)
-				console.log("http://localhost:8989/download.php?target="+json_data.link)
+				if(needToDonwload){
+					window.open("http://localhost:8989/download.php?target="+json_data.link);
+				}
 			})
 	},
 
