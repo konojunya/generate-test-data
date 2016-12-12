@@ -1,0 +1,10 @@
+insert into 'MOCK_TABLE' (pass) values ('}%!)1w$)%#!!$$');
+insert into 'MOCK_TABLE' (pass) values ('}){8{,w&,{,ww{');
+insert into 'MOCK_TABLE' (pass) values (')$)6{,#!#})');
+insert into 'MOCK_TABLE' (pass) values ('%}{}w{9&,1');
+insert into 'MOCK_TABLE' (pass) values ('1&9,}$11&,');
+insert into 'MOCK_TABLE' (pass) values ('),11{),#}%');
+insert into 'MOCK_TABLE' (pass) values ('&9)9#%!{$9%1');
+insert into 'MOCK_TABLE' (pass) values ('#)${{!{)%{1,&');
+insert into 'MOCK_TABLE' (pass) values (',ww){1w%w1');
+insert into 'MOCK_TABLE' (pass) values ('{&,1&#9#{#');

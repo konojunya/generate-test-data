@@ -35,10 +35,17 @@ class Factory{
 		$return_row = array();
 		foreach ($rawDataArray as $value):
 			$name = $value->type;
-			$return_row[] = array(
-				'fieldName' => $value->fieldName,
-				'value' => $this->faker->$name
-			);
+			if($name == "password"){
+				$return_row[] = array(
+					'fieldName' => $value->fieldName,
+					'value' => $this->faker->regexify('^[&%$#!()*+?}{\w{7}]{10,15}$')
+				);
+			}else{
+				$return_row[] = array(
+					'fieldName' => $value->fieldName,
+					'value' => $this->faker->$name
+				);
+			}
 		endforeach;
 		return $return_row;
 	}

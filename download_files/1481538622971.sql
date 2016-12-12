@@ -1,0 +1,10 @@
+insert into 'MOCK_TABLE' (pass) values ('lmmxdevxnecsmjagot{0,1}}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('hoggufhaeaxbtcqnspoybrjn){0,1}}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('{1,5}}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('{1,2}}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('{1,6}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('#){10,}');
+insert into 'MOCK_TABLE' (pass) values (',){10,}');
+insert into 'MOCK_TABLE' (pass) values ('rvgwks{0,1}}{]){10,}');
+insert into 'MOCK_TABLE' (pass) values ('0){10,}');
+insert into 'MOCK_TABLE' (pass) values ('){10,}');

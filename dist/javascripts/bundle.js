@@ -66,7 +66,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _reactTapEventPlugin = __webpack_require__(194);
+	var _reactTapEventPlugin = __webpack_require__(195);
 
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 
@@ -21557,11 +21557,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _TableCell2 = _interopRequireDefault(_TableCell);
 
-	var _Overlay = __webpack_require__(200);
+	var _Overlay = __webpack_require__(188);
 
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 
-	var _AppWebAPIUtils = __webpack_require__(188);
+	var _AppWebAPIUtils = __webpack_require__(189);
 
 	var _AppWebAPIUtils2 = _interopRequireDefault(_AppWebAPIUtils);
 
@@ -22673,7 +22673,199 @@ return /******/ (function(modules) { // webpackBootstrap
 		value: true
 	});
 
-	var _superagent = __webpack_require__(189);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _AppActions = __webpack_require__(185);
+
+	var _AppActions2 = _interopRequireDefault(_AppActions);
+
+	var _AppStore = __webpack_require__(179);
+
+	var _AppStore2 = _interopRequireDefault(_AppStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var getCurrentTableId = function getCurrentTableId() {
+		return _AppStore2.default.getCurrentTableId();
+	};
+
+	var Overlay = function (_React$Component) {
+		_inherits(Overlay, _React$Component);
+
+		function Overlay(props) {
+			_classCallCheck(this, Overlay);
+
+			var _this = _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).call(this, props));
+
+			_this._changeFieldType = function (e) {
+				_AppActions2.default.update_field_type(getCurrentTableId(), e.target.parentNode.dataset.fieldtype);
+				_this.props.toggleOverlay(!_this.props.show);
+			};
+
+			return _this;
+		}
+
+		_createClass(Overlay, [{
+			key: "render",
+			value: function render() {
+
+				return _react2.default.createElement(
+					"div",
+					{ className: "overlay " + (this.props.show ? '' : 'hidden') },
+					_react2.default.createElement(
+						"div",
+						{ className: "type-menu" },
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "name" },
+							"name"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
+							"userName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "password" },
+							"password"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "email" },
+							"email"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "freeEmail" },
+							"freeEmail"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
+							"userName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "domainName" },
+							"domainName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "url" },
+							"url"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv4" },
+							"ipv4"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv6" },
+							"ipv6"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "macAddress" },
+							"macAddress"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "phoneNumber" },
+							"phoneNumber"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "randomDigitNotNull" },
+							"randomDigitNotNull"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "realText" },
+							"realText"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userAgent" },
+							"userAgent"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "creditCardNumber" },
+							"creditCardNumber"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "hexcolor" },
+							"hexcolor"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "rgbcolor" },
+							"rgbcolor"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "colorName" },
+							"colorName"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "uuid" },
+							"uuid"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "sha1" },
+							"sha1"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "imageUrl" },
+							"imageUrl"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "company" },
+							"company"
+						),
+						_react2.default.createElement(
+							"button",
+							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "address" },
+							"address"
+						)
+					)
+				);
+			}
+		}]);
+
+		return Overlay;
+	}(_react2.default.Component);
+
+	exports.default = Overlay;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _superagent = __webpack_require__(190);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -22709,7 +22901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = appWebAPIUtils;
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22733,10 +22925,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  root = undefined;
 	}
 
-	var Emitter = __webpack_require__(190);
-	var RequestBase = __webpack_require__(191);
-	var isObject = __webpack_require__(192);
-	var isFunction = __webpack_require__(193);
+	var Emitter = __webpack_require__(191);
+	var RequestBase = __webpack_require__(192);
+	var isObject = __webpack_require__(193);
+	var isFunction = __webpack_require__(194);
 
 	/**
 	 * Noop.
@@ -23755,7 +23947,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23919,7 +24111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23927,7 +24119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(192);
+	var isObject = __webpack_require__(193);
 
 	/**
 	 * Expose `RequestBase`.
@@ -24356,7 +24548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24378,7 +24570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isObject;
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24390,7 +24582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Boolean}
 	 * @api private
 	 */
-	var isObject = __webpack_require__(192);
+	var isObject = __webpack_require__(193);
 
 	function isFunction(fn) {
 	  var tag = isObject(fn) ? Object.prototype.toString.call(fn) : '';
@@ -24400,13 +24592,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isFunction;
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	var invariant = __webpack_require__(8);
-	var defaultClickRejectionStrategy = __webpack_require__(195);
+	var defaultClickRejectionStrategy = __webpack_require__(196);
 
 	var alreadyInjected = false;
 
@@ -24425,13 +24617,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  alreadyInjected = true;
 
 	  __webpack_require__(42).injection.injectEventPluginsByName({
-	    'TapEventPlugin': __webpack_require__(196)(shouldRejectClick)
+	    'TapEventPlugin': __webpack_require__(197)(shouldRejectClick)
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24443,7 +24635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24467,14 +24659,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var EventConstants = __webpack_require__(197);
+	var EventConstants = __webpack_require__(198);
 	var EventPluginUtils = __webpack_require__(44);
 	var EventPropagators = __webpack_require__(41);
 	var SyntheticUIEvent = __webpack_require__(75);
-	var TouchEventUtils = __webpack_require__(198);
+	var TouchEventUtils = __webpack_require__(199);
 	var ViewportMetrics = __webpack_require__(76);
 
-	var keyOf = __webpack_require__(199);
+	var keyOf = __webpack_require__(200);
 	var topLevelTypes = EventConstants.topLevelTypes;
 
 	var isStartish = EventPluginUtils.isStartish;
@@ -24590,7 +24782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createTapEventPlugin;
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	/**
@@ -24687,7 +24879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EventConstants;
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24734,7 +24926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = TouchEventUtils;
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24772,198 +24964,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	module.exports = keyOf;
-
-/***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _AppActions = __webpack_require__(185);
-
-	var _AppActions2 = _interopRequireDefault(_AppActions);
-
-	var _AppStore = __webpack_require__(179);
-
-	var _AppStore2 = _interopRequireDefault(_AppStore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var getCurrentTableId = function getCurrentTableId() {
-		return _AppStore2.default.getCurrentTableId();
-	};
-
-	var Overlay = function (_React$Component) {
-		_inherits(Overlay, _React$Component);
-
-		function Overlay(props) {
-			_classCallCheck(this, Overlay);
-
-			var _this = _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).call(this, props));
-
-			_this._changeFieldType = function (e) {
-				_AppActions2.default.update_field_type(getCurrentTableId(), e.target.parentNode.dataset.fieldtype);
-				_this.props.toggleOverlay(!_this.props.show);
-			};
-
-			return _this;
-		}
-
-		_createClass(Overlay, [{
-			key: "render",
-			value: function render() {
-
-				return _react2.default.createElement(
-					"div",
-					{ className: "overlay " + (this.props.show ? '' : 'hidden') },
-					_react2.default.createElement(
-						"div",
-						{ className: "type-menu" },
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "name" },
-							"name"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
-							"userName"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "password" },
-							"password"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "email" },
-							"email"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "freeEmail" },
-							"freeEmail"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userName" },
-							"userName"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "domainName" },
-							"domainName"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "url" },
-							"url"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv4" },
-							"ipv4"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "ipv6" },
-							"ipv6"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "macAddress" },
-							"macAddress"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "phoneNumber" },
-							"phoneNumber"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "randomDigitNotNull" },
-							"randomDigitNotNull"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "realText" },
-							"realText"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "userAgent" },
-							"userAgent"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "creditCardNumber" },
-							"creditCardNumber"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "hexcolor" },
-							"hexcolor"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "rgbcolor" },
-							"rgbcolor"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "colorName" },
-							"colorName"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "uuid" },
-							"uuid"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "sha1" },
-							"sha1"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "imageUrl" },
-							"imageUrl"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "company" },
-							"company"
-						),
-						_react2.default.createElement(
-							"button",
-							{ className: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onClick: this._changeFieldType, "data-fieldType": "address" },
-							"address"
-						)
-					)
-				);
-			}
-		}]);
-
-		return Overlay;
-	}(_react2.default.Component);
-
-	exports.default = Overlay;
 
 /***/ }
 /******/ ])
