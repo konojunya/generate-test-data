@@ -11,7 +11,7 @@ var appWebAPIUtils = {
 				var json_data = JSON.parse(res.text);
 				console.log(json_data.sql)
 				if(needToDonwload){
-					window.open("http://localhost:8989/download.php?target="+json_data.link);
+					window.location.pathname = "download.php?target="+json_data.link
 				}
 			})
 	},

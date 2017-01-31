@@ -1,0 +1,10 @@
+insert into 'MOCK_TABLE' (name) values ('坂本 くみ子');
+insert into 'MOCK_TABLE' (name) values ('吉本 幹');
+insert into 'MOCK_TABLE' (name) values ('加納 加奈');
+insert into 'MOCK_TABLE' (name) values ('廣川 直人');
+insert into 'MOCK_TABLE' (name) values ('斉藤 香織');
+insert into 'MOCK_TABLE' (name) values ('宮沢 零');
+insert into 'MOCK_TABLE' (name) values ('山本 七夏');
+insert into 'MOCK_TABLE' (name) values ('若松 淳');
+insert into 'MOCK_TABLE' (name) values ('喜嶋 智也');
+insert into 'MOCK_TABLE' (name) values ('渚 聡太郎');
